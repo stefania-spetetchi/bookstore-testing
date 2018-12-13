@@ -1,48 +1,33 @@
-let mongoose = require('mongoose');
 let Book = require('../models/book');
+let books = [];
+let currentId = 1;
 
 function getBooks(req, res) {
-  let query = Book.find({});
-  
-  query.exec((err, books) => {
-    if(err) res.send(err);
-    res.send(books);
-  });
+  res.send(books);
 }
 
 function postBook (req, res) {
   let newBook = new Book(req.body);
-  
-  newBook.save((err,book) => {
-    if (err) {
-      res.send(err);
-    } else {
-      res.send(book);
-    }
-  });
+  newBook.id = currentId;
+  currentId++;
+  books.push(newBook);
+  res.send(newBook);
 };
 
 function getBook (req, res) {
-  Book.findById(req.params.id, (err, book) => {
-    if (err) { res.send(err) };
-    res.send(book);
-  });
+  let book = books.find((book=>book.id == req.params.id))
+  res.send(book);
 };
 
 function deleteBook(req, res) {
-  Book.remove({_id : req.params.id}, (err, result) => {
-    res.send(result);
-  });
+  books = books.filter((book=>book.id != req.params.id))
+  res.send(true);
 };
 
 function updateBook(req, res) {
-  Book.findById({_id: req.params.id}, (err, book) => {
-    if(err) res.send(err);
-    Object.assign(book, req.body).save((err, book) => {
-      if (err) { res.send(err) };
-      res.send(book);
-    });
-  });
+  let book = books.find((book=>book.id == req.params.id))
+  Object.assign(book, req.body);
+  res.send(book);
 };
 
 module.exports = { getBooks, postBook, getBook, deleteBook, updateBook };

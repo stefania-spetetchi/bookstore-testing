@@ -1,11 +1,8 @@
 let express = require('express');
 let app = express();
-let mongoose = require('mongoose');
 let bodyParser = require('body-parser');
 let port = 8080;
 let book = require('./app/routes/book');
-
-mongoose.connect('mongodb://localhost/products');
 
 app.use(bodyParser.json());
 
@@ -19,7 +16,6 @@ app.route("/book/:id")
 	.get(book.getBook)
 	.delete(book.deleteBook)
 	.put(book.updateBook);
-
 
 app.listen(port);
 
