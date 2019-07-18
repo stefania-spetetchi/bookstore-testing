@@ -1,6 +1,6 @@
 class Book {
   constructor(params) {
-    Object.assign(this.params);
+    Object.assign(this,params);
   }
 } 
 
