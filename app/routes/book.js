@@ -1,33 +1,26 @@
 let Book = require('../models/book');
-let books = [];
-let currentId = 1;
 
 function getBooks(req, res) {
-  res.send(books);
+  res.send(Book.getAll())
 }
 
 function postBook (req, res) {
   let newBook = new Book(req.body);
-  newBook.id = currentId;
-  currentId++;
-  books.push(newBook);
+  Book.addBook(newBook)
   res.send(newBook);
 };
 
 function getBook (req, res) {
-  let book = books.find((book=>book.id == req.params.id))
-  res.send(book);
+  res.send(Book.getBook(req.params.id));
 };
 
 function deleteBook(req, res) {
-  books = books.filter((book=>book.id != req.params.id))
+  Book.remove(req.params.id)
   res.send(true);
 };
 
 function updateBook(req, res) {
-  let book = books.find((book=>book.id == req.params.id))
-  Object.assign(book, req.body);
-  res.send(book);
+  res.send(Book.updateBook(req.body));
 };
 
 module.exports = { getBooks, postBook, getBook, deleteBook, updateBook };
