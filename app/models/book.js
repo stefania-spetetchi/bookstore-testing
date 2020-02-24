@@ -10,6 +10,7 @@ class Book {
     newBook.id = currentId;
     currentId++;
     books.push(newBook)
+    return newBook;
   }
 
   static removeAll() {

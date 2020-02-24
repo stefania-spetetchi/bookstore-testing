@@ -22,11 +22,11 @@ myRouter.get('/book', function(request,response) {
 
 myRouter.post('/book', function(request,response) {// Get our query params from the query string
 	// Add book to database
-	Book.addBook(request.body)
+	const addedBook = Book.addBook(request.body)
 	
-	// Return success 
-	response.writeHead(200);
-	return response.end();
+	// Return success with added book
+	response.writeHead(200, { "Content-Type": "application/json" });
+	return response.end(JSON.stringify(addedBook));
 });
 
 myRouter.get('/book/:id', function(request,response) {// Get our query params from the query string
