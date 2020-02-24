@@ -3,13 +3,14 @@
   "version": "1.0.0",
   "description": "A bookstore API",
   "main": "server.js",
-  "author": "Sam",
+  "author": "Project Shift",
   "license": "ISC",
   "dependencies": {
-    "body-parser": "^1.15.1",
-    "config": "^1.20.1",
-    "express": "^4.13.4",
-    "morgan": "^1.7.0"
+    "body-parser": "^1.18.2",
+    "finalhandler": "latest",
+    "http": "latest",
+    "rand-token": "^0.4.0",
+    "router": "^1.3.2"
   },
   "devDependencies": {
     "chai": "^3.5.0",
