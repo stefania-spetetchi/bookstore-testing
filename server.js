@@ -20,7 +20,13 @@ myRouter.get('/book', function(request,response) {
 	return response.end(JSON.stringify(Book.getAll()));
 });
 
-myRouter.post('/book', function(request,response) {// Get our query params from the query string
+myRouter.post('/book', function(request,response) {
+	// If pages aren't sent, reject the request
+	if (!request.body.pages ){
+		response.writeHead(400);
+		return response.end();
+	}
+	
 	// Add book to database
 	const addedBook = Book.addBook(request.body)
 	
