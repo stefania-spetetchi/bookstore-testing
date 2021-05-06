@@ -1,9 +1,10 @@
 let books = [];
 let currentId = 1;
+const util = require('util');
 
 class Book {
   constructor(params) {
-    Object.assign(this,params);
+    Object.assign(this, params);
   }
 
   static addBook(newBook) {
@@ -18,11 +19,11 @@ class Book {
   }
 
   static remove(bookIdToRemove) {
-    books = books.filter((book=>book.id != bookIdToRemove))
+    books = books.filter((book => book.id != bookIdToRemove))
   }
 
   static getBook(bookId) {
-    return books.find((book=>book.id == bookId))
+    return books.find((book => book.id == bookId))
   }
 
   static getAll() {
@@ -30,11 +31,11 @@ class Book {
   }
 
   static updateBook(updatedBook) {
-    let book = books.find((book=>book.id == updatedBook.id))
+    let book = books.find((book => book.id == updatedBook.id))
     Object.assign(book, updatedBook);
     return book;
   }
-} 
+}
 
 //Exports the Book for use elsewhere.
 module.exports = Book;
